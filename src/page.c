@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:07:47 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/26 14:29:18 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:01:43 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*create_page(char type, size_t type_max, size_t size)
 		g_mem.pages = page;
 	else
 		push_page(page);
-	ptr = create_header(&g_mem.root[type - 1], page, size);
+	ptr = create_header(&g_mem.root[type - 1], page, size, 0);
 	fill_page(&g_mem.root[type - 1], page);
 	return (ptr);
 }
