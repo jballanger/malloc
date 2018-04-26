@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 10:35:11 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/26 15:04:32 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:14:49 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ int	main(int ac, char **av)
 	ft_memcpy(ptr4, "incroyable!__!\0", 15);
 	ft_putendl(ptr3);
 	ft_putendl(ptr4);
+	ft_putendl(ptr3 + (sizeof(t_header) + 6));
 }
