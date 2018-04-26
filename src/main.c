@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 10:35:11 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/26 14:36:15 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:04:32 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ int	main(int ac, char **av)
 	void	*ptr;
 	void	*ptr2;
 	void	*ptr3;
+	void	*ptr4;
 
 	ac = 777;
 	av = NULL;
 	ptr = fmalloc(2);
 	ptr2 = fmalloc(222);
-	//show_pages();
-	//ft_putendl("________________________________________");
-	ptr3 = (char*)fmalloc(59);
+	ptr3 = (char*)fmalloc(6);
+	ptr4 = (char*)fmalloc(15);
 	show_pages();
-	//ft_memcpy(ptr3, "super", 5);
-	//ft_putendl(ptr3);
+	ft_memcpy(ptr3, "super\0", 6);
+	ft_memcpy(ptr4, "incroyable!__!\0", 15);
+	ft_putendl(ptr3);
+	ft_putendl(ptr4);
 }
