@@ -1,3 +1,7 @@
+ifeq ($(HOSTTYPE),)
+	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+endif
+
 NAME = malloc
 LIBFT = lft
 SRC_NAME = main.c\
