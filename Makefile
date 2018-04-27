@@ -2,6 +2,7 @@ NAME = malloc
 LIBFT = lft
 SRC_NAME = main.c\
 	malloc.c\
+	free.c\
 	page.c\
 	header.c\
 	block.c\
