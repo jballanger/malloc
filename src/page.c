@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:07:47 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/27 10:17:46 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/27 13:35:37 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,28 @@ void	push_page(t_page *page)
 		tmp = tmp->next;
 	tmp->next = page;
 	page->prev = tmp;
+}
+
+void	*create_large_page(size_t size)
+{
+	t_page	*page;
+	void	*root;
+	void	*ptr;
+
+	root = ft_alloc(sizeof(t_page) + sizeof(t_header) + size);
+	page = root;
+	root += sizeof(t_page);
+	page->type = 3;
+	page->blocks = NULL;
+	page->next = NULL;
+	page->prev = NULL;
+	if (!g_mem.pages)
+		g_mem.pages = page;
+	else
+		push_page(page);
+	ptr = create_header(&root, page, size, 0);
+	page->available = size;
+	return (ptr);
 }
 
 void	*create_page(char type, size_t type_max, size_t size)

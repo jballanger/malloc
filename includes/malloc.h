@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:48:19 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/27 10:40:31 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/27 12:56:41 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void				*fmalloc(size_t size);
 void				ffree(void *ptr);
 void				*ft_alloc(size_t size);
 void				*create_page(char type, size_t type_max, size_t size);
+void				*create_large_page(size_t size);
 t_page				*search_page(char type, size_t size);
 void				*create_header(void **root, t_page *page, size_t size,\
 	char free);

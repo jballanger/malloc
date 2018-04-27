@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:51:42 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/27 10:25:33 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/27 12:52:06 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*ft_malloc(size_t size)
 			return (create_page(2, SMALL_MAX, size));
 	}
 	else if (IS_LARGE(size))
-		return (NULL);
+		return (create_large_page(size));
 	return (NULL);
 }
 
