@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 10:32:50 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/27 14:26:46 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:33:37 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ffree(void *ptr)
 	t_header	*header;
 	t_header	*tmp_header;
 
+	if (!ptr)
+		return ;
 	header = (ptr - sizeof(t_header));
 	tmp_header = header;
 	while (tmp_header && tmp_header->prev)
