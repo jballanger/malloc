@@ -1,3 +1,4 @@
 malloc
 *.o
 *.a
+*.so
