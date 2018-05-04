@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 10:32:50 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/04 15:29:23 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/04 15:54:24 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,29 @@ t_page		*search_ptr_page(void *ptr, t_page *pages)
 
 	while (pages)
 	{
-		if (pages->type == 1)
-			page_max_addr = (size_t)(pages + (TINY_MAX - 1));
-		else if (pages->type == 2)
-			page_max_addr = (size_t)(pages + (SMALL_MAX - 1));
-		else if (pages->type == 3)
-			page_max_addr = (size_t)(pages + (sizeof(t_page) + sizeof(t_header) + pages->available - 1));
-		if ((size_t)ptr > (size_t)pages && (size_t)ptr < page_max_addr)
-			return (pages);
+		if (pages->type == 3)
+		{
+			if ((size_t)pages->blocks->address == (size_t)ptr) {
+				ft_putendl("HHHAFHGFJDGHSG");
+				return (pages);
+			}
+			/*ft_putendl("(((((((((((((((((((((((");
+			ft_putnbr((size_t)pages->blocks->address);
+			ft_putchar('\n');
+			ft_putnbr((size_t)ptr);
+			ft_putchar('\n');
+			ft_putendl(")))))))))))))))))))))))");*/
+			return (NULL);
+		}
+		else
+		{
+			if (pages->type == 1)
+				page_max_addr = (size_t)(pages + (TINY_MAX - 1));
+			else if (pages->type == 2)
+				page_max_addr = (size_t)(pages + (SMALL_MAX - 1));
+			if ((size_t)ptr > (size_t)pages && (size_t)ptr < page_max_addr)
+				return (pages);
+		}
 		pages = pages->next;
 	}
 	return (NULL);
