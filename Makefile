@@ -2,8 +2,8 @@ ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
-#NAME = libft_malloc_$(HOSTTYPE).so
-NAME = malloc
+NAME = libft_malloc_$(HOSTTYPE).so
+#NAME = malloc
 LIBFT = lft
 SRC_NAME = main.c\
 	malloc.c\
@@ -26,10 +26,10 @@ lft:
 	$(MAKE) -C libft
 
 $(NAME): $(OBJ)
-	$(CC) $^ -o $@  -Llibft -lft
-	#$(CC) -shared $^ -o $@  -Llibft -lft
-	#@rm -f libft_malloc.so
-	#@ln -s $(NAME) libft_malloc.so
+	#$(CC) $^ -o $@  -Llibft -lft
+	$(CC) -shared $^ -o $@  -Llibft -lft
+	@rm -f libft_malloc.so
+	@ln -s $(NAME) libft_malloc.so
 
 clean:
 	@$(MAKE) clean -C libft
