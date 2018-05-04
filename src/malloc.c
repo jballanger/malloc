@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:51:42 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/27 14:56:50 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/04 15:27:31 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	*ft_malloc(size_t size)
 	return (NULL);
 }
 
-void	*fmalloc(size_t size)
+void	*malloc(size_t size)
 {
 	void	*ptr;
-
+	ft_putstr("Call to malloc for ");
+	ft_putnbr(size);
+	ft_putchar('\n');
 	if (size < 1)
 		return (NULL);
 	ptr = ft_malloc(size);
