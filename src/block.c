@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:10:09 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/27 10:25:20 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/04 13:04:55 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*get_block(t_page *page, size_t size)
 	{
 		if (header->free == 1 && header->size >= size)
 		{
-			if ((header->size - (size + sizeof(t_header))) > 40)
+			if ((int)(header->size - (size + sizeof(t_header))) > 40)
 				split_block(page, header, size);
 			header->free = 0;
 			page->available -= size;
