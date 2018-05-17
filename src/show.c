@@ -28,6 +28,9 @@ void	show_pages()
 			ft_putendl("SMALL");
 		if (page->type == 3)
 			ft_putendl("LARGE");
+		ft_putstr("Address: ");
+		ft_putnbr((size_t)page);
+		ft_putchar('\n');
 		ft_putstr("Available: ");
 		ft_putnbr(page->available);
 		ft_putchar('\n');
@@ -37,7 +40,9 @@ void	show_pages()
 			while (header)
 			{
 				ft_putendl("     ---------------");
-				ft_putstr("     Size: ");
+				ft_putstr("     Address: ");
+				ft_putnbr((size_t)header->address);
+				ft_putstr("\n     Size: ");
 				ft_putnbr(header->size);
 				ft_putstr("\n     Free: ");
 				ft_putendl((header->free == 0) ? "No" : "Yes");
