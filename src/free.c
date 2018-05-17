@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 10:32:50 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/04 15:54:24 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:10:06 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,15 @@ t_page		*search_ptr_page(void *ptr, t_page *pages)
 	{
 		if (pages->type == 3)
 		{
-			if ((size_t)pages->blocks->address == (size_t)ptr) {
-				ft_putendl("HHHAFHGFJDGHSG");
+			if ((size_t)pages->blocks->address == (size_t)ptr)
 				return (pages);
-			}
-			/*ft_putendl("(((((((((((((((((((((((");
-			ft_putnbr((size_t)pages->blocks->address);
-			ft_putchar('\n');
-			ft_putnbr((size_t)ptr);
-			ft_putchar('\n');
-			ft_putendl(")))))))))))))))))))))))");*/
-			return (NULL);
 		}
 		else
 		{
 			if (pages->type == 1)
-				page_max_addr = (size_t)(pages + (TINY_MAX - 1));
+				page_max_addr = ((size_t)pages + (TINY_MAX - 1));
 			else if (pages->type == 2)
-				page_max_addr = (size_t)(pages + (SMALL_MAX - 1));
+				page_max_addr = ((size_t)pages + (SMALL_MAX - 1));
 			if ((size_t)ptr > (size_t)pages && (size_t)ptr < page_max_addr)
 				return (pages);
 		}
@@ -83,6 +74,9 @@ void		free(void *ptr)
 
 	if (!ptr || !own_ptr(ptr))
 		return ;
+	/*ft_putstr("Call to free on ");
+	ft_putnbr((size_t)ptr);
+	ft_putchar('\n');*/
 	header = (ptr - sizeof(t_header));
 	while (header && header->prev)
 		header = header->prev;
@@ -90,7 +84,6 @@ void		free(void *ptr)
 	header = (ptr - sizeof(t_header));
 	if (page->type == 3)
 	{
-		ft_putendl("FREE LARGE PAGE");
 		if (page->prev)
 			page->prev->next = page->next;
 		if (page->next)
