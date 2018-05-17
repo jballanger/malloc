@@ -11,7 +11,8 @@ SRC_NAME = main.c\
 	page.c\
 	header.c\
 	block.c\
-	show.c
+	show.c\
+	search.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
