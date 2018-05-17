@@ -2,3 +2,5 @@ malloc
 *.o
 *.a
 *.so
+.vscode/
+test*
