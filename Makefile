@@ -3,7 +3,6 @@ ifeq ($(HOSTTYPE),)
 endif
 
 NAME = libft_malloc_$(HOSTTYPE).so
-#NAME = malloc
 LIBFT = lft
 SRC_NAME = main.c\
 	malloc.c\
@@ -13,9 +12,13 @@ SRC_NAME = main.c\
 	header.c\
 	block.c\
 	show.c
-SRC_PATH = src
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-OBJ = $(SRC:.c=.o)
+OBJ_NAME = $(SRC_NAME:.c=.o)
+SRC_PATH = ./src/
+OBJ_PATH = ./obj/
+INC_PATH = ./includes/
+SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
+INC = $(addprefix -I,$(INC_PATH))
 CC = clang
 CPPFLAGS = -Iincludes
 CFLAGS = -Wall -Wextra -Werror
@@ -26,10 +29,13 @@ lft:
 	$(MAKE) -C libft
 
 $(NAME): $(OBJ)
-	#$(CC) $^ -o $@  -Llibft -lft
 	$(CC) -shared $^ -o $@  -Llibft -lft
 	@rm -f libft_malloc.so
 	@ln -s $(NAME) libft_malloc.so
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 clean:
 	@$(MAKE) clean -C libft
