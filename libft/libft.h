@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:59:11 by jballang          #+#    #+#             */
-/*   Updated: 2017/06/01 11:43:02 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/17 15:19:22 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 
 char				*ft_itoa(int n);
+void				ft_print_itoa_base(int n, int base);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -121,6 +122,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 int					ft_wordlenc(const char *s, char c);
 int					ft_intlen(int n);
+int					ft_intlen_base(int n, int base);
 int					ft_strintlen(const char *str);
 int					ft_isupper(int c);
 int					ft_islower(int c);

@@ -6,7 +6,7 @@
 #    By: jballang <jballang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 15:18:22 by jballang          #+#    #+#              #
-#    Updated: 2017/04/24 12:14:01 by jballang         ###   ########.fr        #
+#    Updated: 2018/05/17 15:10:40 by jballang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ ft_itoa.c ft_memcmp.c ft_putnbr_fd.c ft_strequ.c ft_strncpy.c ft_toupper.c \
 ft_lstadd.c ft_memcpy.c ft_putstr.c ft_striter.c ft_strnequ.c \
 ft_lstdel.c ft_memdel.c ft_putstr_fd.c ft_striteri.c ft_strnew.c \
 ft_intlen.c ft_wordlenc.c ft_strintlen.c ft_isupper.c ft_islower.c ft_lstpush.c \
-ft_rrange.c ft_isvalid.c
+ft_rrange.c ft_isvalid.c ft_print_itoa_base.c ft_intlen_base.c
 
 OBJ = $(SRC:.c=.o)
 
