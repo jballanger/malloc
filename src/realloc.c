@@ -56,7 +56,7 @@ void	*ft_realloc(void *ptr, size_t size)
 void	*realloc(void *ptr, size_t size)
 {
 	if (!ptr)
-		return malloc(size);
+		return (malloc(size));
 	if (!own_ptr(ptr))
 		return (NULL);
 	if (size == 0)

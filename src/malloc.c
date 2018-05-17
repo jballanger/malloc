@@ -51,6 +51,7 @@ void	*ft_malloc(size_t size)
 void	*malloc(size_t size)
 {
 	void	*ptr;
+
 	if (size < 1)
 		return (NULL);
 	ptr = ft_malloc(size);
