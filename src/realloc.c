@@ -55,9 +55,6 @@ void	*ft_realloc(void *ptr, size_t size)
 
 void	*realloc(void *ptr, size_t size)
 {
-	ft_putstr("Call to realloc for ");
-	ft_putnbr(size);
-	ft_putchar('\n');
 	if (!ptr)
 		return malloc(size);
 	if (size == 0)
