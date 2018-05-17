@@ -65,6 +65,6 @@ void				*create_header(void **root, t_page *page, size_t size,\
 void				push_header(t_page *page, t_header *header);
 void				*get_block(t_page *page, size_t size);
 int					own_ptr(void *ptr);
-void				show_pages();
+void				show_alloc_mem();
 
 #endif
