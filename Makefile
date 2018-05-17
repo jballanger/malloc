@@ -4,8 +4,7 @@ endif
 
 NAME = libft_malloc_$(HOSTTYPE).so
 LIBFT = lft
-SRC_NAME = main.c\
-	malloc.c\
+SRC_NAME = malloc.c\
 	realloc.c\
 	free.c\
 	page.c\
