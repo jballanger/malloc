@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:51:42 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/04 15:27:31 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/17 09:31:57 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	*ft_alloc(size_t size)
 {
 	void	*map;
 
-	ft_putendl("call to mmap");
 	map = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1,
 		0);
 	if (map == MAP_FAILED)
@@ -52,9 +51,6 @@ void	*ft_malloc(size_t size)
 void	*malloc(size_t size)
 {
 	void	*ptr;
-	ft_putstr("Call to malloc for ");
-	ft_putnbr(size);
-	ft_putchar('\n');
 	if (size < 1)
 		return (NULL);
 	ptr = ft_malloc(size);
