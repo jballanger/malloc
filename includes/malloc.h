@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:48:19 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/04 14:06:56 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/18 09:57:30 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ typedef struct		s_page
 	struct s_page	*prev;
 }					t_page;
 
+typedef struct		s_key
+{
+	unsigned char	value[2];
+}					t_key;
+
 typedef struct		s_mem
 {
 	void			*root[2];
@@ -66,5 +71,6 @@ void				push_header(t_page *page, t_header *header);
 void				*get_block(t_page *page, size_t size);
 int					own_ptr(void *ptr);
 void				show_alloc_mem();
+void				create_checksum(t_key *key, void **ptr, size_t size);
 
 #endif

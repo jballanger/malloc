@@ -11,7 +11,8 @@ SRC_NAME = malloc.c\
 	header.c\
 	block.c\
 	show.c\
-	search.c
+	search.c\
+	checksum.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
