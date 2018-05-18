@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:48:19 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/04 14:06:56 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/18 10:42:40 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../libft/libft.h"
 
 # include <sys/mman.h>
+# include <signal.h>
 
 typedef struct		s_header
 {
@@ -66,5 +67,7 @@ void				push_header(t_page *page, t_header *header);
 void				*get_block(t_page *page, size_t size);
 int					own_ptr(void *ptr);
 void				show_alloc_mem();
+void				check_page(t_page *page);
+void				check_header(t_header *header);
 
 #endif
