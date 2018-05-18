@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:18:08 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/18 12:19:58 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/18 13:38:00 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	*create_header(void **root, t_page *page, size_t size, char free)
 	header->free = free;
 	header->next = NULL;
 	header->prev = NULL;
-	ft_putnbr(size);
 	create_checksum((void*)&header, sizeof(t_header));
 	*root += size;
 	if (!page->blocks)
@@ -45,5 +44,7 @@ void	*create_header(void **root, t_page *page, size_t size, char free)
 		page->available -= (size + sizeof(t_header));
 	else
 		page->available -= (sizeof(t_header));
+	header->free = 124;
+	create_checksum((void*)&header, sizeof(t_header));
 	return (header->address);
 }

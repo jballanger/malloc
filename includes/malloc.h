@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:48:19 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/18 12:11:03 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/18 14:15:16 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void				push_header(t_page *page, t_header *header);
 void				*get_block(t_page *page, size_t size);
 int					own_ptr(void *ptr);
 void				show_alloc_mem();
+void				show_pages();
 void				create_checksum(void **ptr, int size);
 
 #endif

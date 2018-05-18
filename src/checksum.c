@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 09:50:12 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/18 12:18:52 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/18 13:37:30 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ char	get_char_from_add(unsigned char *ptr, int size)
 
 void	create_checksum(void **ptr, int size)
 {
-	//t_key	*key;
+	void	*tmp;
 
-	//key = (*ptr + size);
-	//key->value[0] = get_char_from_add((unsigned char*)ptr, size);
+	tmp = *ptr;
 	ft_putchar('\n');
-	ft_putnbr((size_t)ptr);
+	ft_putnbr((size_t)tmp);
 	ft_putstr(" | ");
-	ft_putnbr(get_char_from_add((unsigned char*)ptr, size));
+	ft_putnbr(get_char_from_add((unsigned char*)tmp, size));
 	ft_putchar('\n');
 }
