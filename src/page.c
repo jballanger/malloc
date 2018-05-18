@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:07:47 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/18 10:12:55 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/18 12:09:46 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	fill_page(void **root, t_page *page)
 {
 	t_header	*header;
-	t_key		*key;
 
 	header = *root;
 	*root += sizeof(t_header);
@@ -24,9 +23,6 @@ void	fill_page(void **root, t_page *page)
 	header->free = 1;
 	header->next = NULL;
 	header->prev = NULL;
-	key = *root;
-	*root += sizeof(t_key);
-	create_checksum(key, (void*)header, sizeof(t_header));
 	*root += page->available;
 	if (!page->blocks)
 		page->blocks = header;
@@ -49,7 +45,6 @@ void	push_page(t_page *page)
 void	*create_large_page(size_t size)
 {
 	t_page	*page;
-	t_key	*key;
 	void	*root;
 	void	*ptr;
 
@@ -60,9 +55,6 @@ void	*create_large_page(size_t size)
 	page->blocks = NULL;
 	page->next = NULL;
 	page->prev = NULL;
-	key = root;
-	root += sizeof(t_key);
-	create_checksum(key, (void*)page, sizeof(t_page));
 	if (!g_mem.pages)
 		g_mem.pages = page;
 	else
@@ -75,7 +67,6 @@ void	*create_large_page(size_t size)
 void	*create_page(char type, size_t type_max, size_t size)
 {
 	t_page	*page;
-	t_key	*key;
 	void	*ptr;
 
 	g_mem.root[type - 1] = ft_alloc(type_max);
@@ -86,9 +77,6 @@ void	*create_page(char type, size_t type_max, size_t size)
 	page->blocks = NULL;
 	page->next = NULL;
 	page->prev = NULL;
-	key = g_mem.root[type - 1];
-	create_checksum(key, (void*)page, sizeof(t_page));
-	g_mem.root[type - 1] += sizeof(t_key);
 	if (!g_mem.pages)
 		g_mem.pages = page;
 	else
@@ -106,7 +94,7 @@ t_page	*search_page(char type, size_t size)
 	while (page)
 	{
 		if (page->type == type && page->available >= \
-			(size + sizeof(t_header) + sizeof(t_key)))
+			(size + sizeof(t_header)))
 			return (page);
 		page = page->next;
 	}

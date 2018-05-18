@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:09:31 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/17 15:25:44 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/18 12:16:39 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ size_t	print_page(char type)
 			header = page->blocks;
 			while (header)
 			{
+				create_checksum((void*)&header, sizeof(t_header));
 				print_addr(header, 0);
 				ft_putstr(" - ");
 				print_addr((void*)((size_t)header + header->size), 0);
