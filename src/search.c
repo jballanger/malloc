@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 10:32:50 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 15:35:07 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:03:12 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			own_ptr(void *ptr)
 	t_page		*ptr_page;
 	t_header	*header;
 
-	pages = *g_mem.pages;
+	pages = g_mem.pages;
 	ptr_page = search_ptr_page(ptr, pages);
 	if (ptr_page)
 	{
