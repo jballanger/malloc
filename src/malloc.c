@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:51:42 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 15:39:53 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:06:26 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*ft_malloc(size_t size)
 			ft_putnbr((size_t)*g_mem.pages);
 			ft_putchar('\n');*/
 			page = g_mem.pages;
-			ft_putendl("5-------------");
+			/*ft_putendl("5-------------");
 			ft_putnbr((size_t)page);
 			ft_putchar('\n');
 			//page = *g_mem.pages;
@@ -53,9 +53,9 @@ void	*ft_malloc(size_t size)
 			ft_putendl("8-------------");
 			ft_putnbr((size_t)page);
 			ft_putchar('\n');
-			ft_putendl("d");
+			ft_putendl("d");*/
 			check((void*)&page, sizeof(t_page));
-			ft_putendl("/d/");
+			/*ft_putendl("/d/");
 			ft_putnbr((size_t)page);
 			ft_putchar('\n');
 			ft_putendl("1++++++");
@@ -73,7 +73,7 @@ void	*ft_malloc(size_t size)
 			ft_putnbr((size_t)g_mem.pages);
 			ft_putchar('\n');
 			ft_putnbr((size_t)g_mem.pages);
-			ft_putchar('\n');
+			ft_putchar('\n');*/
 			return (p);
 		}
 	}
@@ -93,12 +93,12 @@ void	*ft_malloc(size_t size)
 void	*malloc(size_t size)
 {
 	void	*ptr;
-	t_page	*page;
+	//t_page	*page;
 
 	if (size < 1)
 		return (NULL);
 	ptr = ft_malloc(size);
-	ft_putendl("^^^^^^^^^^^");
+	/*ft_putendl("^^^^^^^^^^^");
 	ft_putnbr((size_t)g_mem.pages);
 	ft_putchar('\n');
 	ft_putnbr((size_t)g_mem.pages);
@@ -107,6 +107,6 @@ void	*malloc(size_t size)
 	ft_putendl("*****");
 	ft_putnbr((size_t)page);
 	ft_putchar('\n');
-	ft_putendl("*****");
+	ft_putendl("*****");*/
 	return (ptr);
 }

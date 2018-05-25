@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:07:47 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 15:49:27 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:12:11 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	push_page(t_page *page)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = page;
+	//update_checksum((void*)tmp, sizeof(t_page));
 	page->prev = tmp;
 }
 

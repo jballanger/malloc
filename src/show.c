@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:09:31 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 15:53:12 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:05:25 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	show_pages()
 			header = page->blocks;
 			while (header)
 			{
+				check((void*)&header, sizeof(t_header));
 				ft_putendl("     ---------------");
 				ft_putstr("     Address: ");
 				ft_putnbr((size_t)header->address);

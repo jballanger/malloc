@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 09:50:12 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 14:27:08 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:18:21 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,31 @@ unsigned char	get_char_from_add(unsigned char *ptr, int size)
 	return (c & 255);
 }
 
+void	update_checksum(void **ptr, int size)
+{
+	t_key	*key;
+
+	key = (*ptr + size);
+	create_checksum(&key, NULL, ptr, size);
+}
+
 void	create_checksum(t_key **key, unsigned char buff[2], void **ptr, int size)
 {
 	t_key	*tmp;
 	void	*address;
 
+	ft_putendl("oui");
 	address = *ptr;
+	ft_putendl("oui2");
 	if (key)
 	{
+		ft_putendl("oui2.5");
 		tmp = *key;
+		ft_putendl("oui3");
 		tmp->value[0] = get_char_from_add((unsigned char*)address, size);
+		ft_putendl("oui3.5");
 		tmp->value[1] = 42;
+		ft_putendl("oui4");
 	}
 	else if (buff)
 	{

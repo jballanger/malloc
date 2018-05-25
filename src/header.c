@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:18:08 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 12:40:15 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:15:14 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	push_header(t_page *page, t_header *header)
 	while (tmp && tmp->next)
 		tmp = tmp->next;
 	tmp->next = header;
+	ft_putendl("cc");
+	update_checksum((void*)tmp, sizeof(t_header));
 	header->prev = tmp;
 }
 
