@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:09:31 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/18 12:59:04 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:53:12 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ size_t	print_page(char type)
 	t_header	*header;
 	size_t		total;
 
+	if (!g_mem.pages) return (0);
 	page = g_mem.pages;
 	total = 0;
 	while (page)
 	{
+		// check((void*)&page, sizeof(t_page));
 		if (page->type == type)
 		{
 			if (page->type == 1)
@@ -42,7 +44,6 @@ size_t	print_page(char type)
 			header = page->blocks;
 			while (header)
 			{
-				create_checksum((void*)&header, sizeof(t_header));
 				print_addr(header, 0);
 				ft_putstr(" - ");
 				print_addr((void*)((size_t)header + header->size), 0);
@@ -63,9 +64,13 @@ void	show_pages()
 	t_page		*page;
 	t_header	*header;
 
+	ft_putendl("!!! show_pages !!!");
+	if (!g_mem.pages) return ;
 	page = g_mem.pages;
 	while (page)
 	{
+		ft_putendl("x2");
+		check((void*)&page, sizeof(t_page));
 		ft_putendl("------------------------------");
 		ft_putstr("Type: ");
 		if (page->type == 1)
@@ -79,6 +84,15 @@ void	show_pages()
 		ft_putchar('\n');
 		ft_putstr("Available: ");
 		ft_putnbr(page->available);
+		ft_putchar('\n');
+		ft_putstr("Blocks: ");
+		ft_putnbr((size_t)page->blocks);
+		ft_putchar('\n');
+		ft_putstr("Prev: ");
+		ft_putnbr((size_t)page->prev);
+		ft_putchar('\n');
+		ft_putstr("Next: ");
+		ft_putnbr((size_t)page->next);
 		ft_putchar('\n');
 		if (page->blocks)
 		{

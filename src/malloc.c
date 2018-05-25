@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:51:42 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/18 10:03:33 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:39:53 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,50 @@ void	*ft_malloc(size_t size)
 		page = search_page(1, size);
 		if (page)
 			return (get_block(page, size));
-		else
-			return (create_page(1, TINY_MAX, size));
+		else {
+			void *p = create_page(1, TINY_MAX, size);
+			/*ft_putendl("-------------");
+			ft_putnbr((size_t)*g_mem.pages);
+			ft_putchar('\n');*/
+			page = g_mem.pages;
+			ft_putendl("5-------------");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			//page = *g_mem.pages;
+			ft_putendl("6-------------");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			//page = *g_mem.pages;
+			ft_putendl("7-------------");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			//page = *g_mem.pages;
+			ft_putendl("8-------------");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			ft_putendl("d");
+			check((void*)&page, sizeof(t_page));
+			ft_putendl("/d/");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			ft_putendl("1++++++");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			//page = *g_mem.pages;
+			ft_putendl("2++++++");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			//page = *g_mem.pages;
+			ft_putendl("3++++++");
+			ft_putnbr((size_t)page);
+			ft_putchar('\n');
+			ft_putendl("######");
+			ft_putnbr((size_t)g_mem.pages);
+			ft_putchar('\n');
+			ft_putnbr((size_t)g_mem.pages);
+			ft_putchar('\n');
+			return (p);
+		}
 	}
 	else if (IS_SMALL(size))
 	{
@@ -51,9 +93,20 @@ void	*ft_malloc(size_t size)
 void	*malloc(size_t size)
 {
 	void	*ptr;
+	t_page	*page;
 
 	if (size < 1)
 		return (NULL);
 	ptr = ft_malloc(size);
+	ft_putendl("^^^^^^^^^^^");
+	ft_putnbr((size_t)g_mem.pages);
+	ft_putchar('\n');
+	ft_putnbr((size_t)g_mem.pages);
+	ft_putchar('\n');
+	page = g_mem.pages;
+	ft_putendl("*****");
+	ft_putnbr((size_t)page);
+	ft_putchar('\n');
+	ft_putendl("*****");
 	return (ptr);
 }
