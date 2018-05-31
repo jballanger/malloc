@@ -16,6 +16,7 @@ void	push_header(t_page *page, t_header *header)
 {
 	t_header	*tmp;
 
+  check((void*)&page, sizeof(t_page));
 	tmp = page->blocks;
   check((void*)&tmp, sizeof(t_header));
   ft_putendl("ok2");

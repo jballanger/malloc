@@ -50,7 +50,7 @@ void	push_page(t_page *page)
 	ft_putendl("1");
 	check((void*)&tmp, sizeof(t_page));
 	ft_putendl("/1/");
-	while (tmp->next)
+	while (tmp && tmp->next)
   {
 		tmp = tmp->next;
     if (tmp) check((void*)&tmp, sizeof(t_page));
@@ -74,6 +74,7 @@ void	*create_large_page(size_t size)
 	page = root;
 	root += sizeof(t_page);
 	page->type = 3;
+  page->available = size;
 	page->blocks = NULL;
 	page->next = NULL;
 	page->prev = NULL;
@@ -86,9 +87,8 @@ void	*create_large_page(size_t size)
 	else
 		push_page(page);
 	ptr = create_header(&root, page, size, 0);
-	page->available = size;
-  ft_putendl("updating checksum in create_large_page");
-  update_checksum((void*)&page, sizeof(t_page));
+  /*ft_putendl("updating checksum in create_large_page");
+  update_checksum((void*)&page, sizeof(t_page));*/
 	return (ptr);
 }
 
@@ -108,6 +108,7 @@ void	*create_page(char type, size_t type_max, size_t size)
 	page->prev = NULL;
 	key = g_mem.root[type - 1];
 	g_mem.root[type - 1] += sizeof(t_key);
+  create_checksum(&key, NULL, (void*)&page, sizeof(t_page));
 	if (!g_mem.pages)
 		g_mem.pages = page;
 	else
@@ -115,7 +116,6 @@ void	*create_page(char type, size_t type_max, size_t size)
 	ptr = create_header(&g_mem.root[type - 1], page, size, 0);
 	fill_page(&g_mem.root[type - 1], page);
 	ft_putendl("Creating page checksum in create_page");
-	create_checksum(&key, NULL, (void*)&page, sizeof(t_page));
 	return (ptr);
 }
 

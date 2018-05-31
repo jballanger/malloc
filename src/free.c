@@ -30,10 +30,18 @@ t_page  *get_page(t_header *header)
 
 void		free_large(t_page *page, t_header *header)
 {
+
+  // check free large, not sure it really work ?
 	if (page->prev)
+  {
 		page->prev->next = page->next;
+    update_checksum((void*)&page->prev, (sizeof(t_page)));
+  }
 	if (page->next)
+  {
 		page->next->prev = page->prev;
+    update_checksum((void*)&page->next, (sizeof(t_page)));
+  }
 	if (!page->prev && page->next)
 		g_mem.pages = page->next;
 	if (!page->prev && !page->next)
