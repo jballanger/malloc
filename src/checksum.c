@@ -19,6 +19,9 @@ void	check(void **ptr, int size)
 
 	create_checksum(NULL, key, ptr, size);
 	ptr_key = (*ptr + size);
+	if (key[0] == ptr_key->value[0] &&\
+		key[1] == ptr_key->value[1])
+		return;
 	ft_putstr("ptr_key[0]: ");
 	ft_putnbr(ptr_key->value[0]);
 	ft_putstr("\nptr_key[1]: ");
@@ -28,9 +31,6 @@ void	check(void **ptr, int size)
 	ft_putstr("\nkey[1]: ");
 	ft_putnbr(key[1]);
 	ft_putchar('\n');
-	if (key[0] == ptr_key->value[0] &&\
-		key[1] == ptr_key->value[1])
-		return;
 	ft_putendl("Invalid header, exiting..");
 	kill(getpid(), SIGSEGV);
 }
@@ -66,25 +66,25 @@ void	create_checksum(t_key **key, unsigned char buff[2], void **ptr, int size)
 	t_key	*tmp;
 	void	*address;
 
-	ft_putendl("oui");
+	//ft_putendl("oui");
 	address = *ptr;
-	ft_putendl("oui2");
+	//ft_putendl("oui2");
 	if (key)
 	{
-		ft_putendl("oui2.5");
+		//ft_putendl("oui2.5");
 		tmp = *key;
-		ft_putendl("oui3");
+		//ft_putendl("oui3");
 		tmp->value[0] = get_char_from_add((unsigned char*)address, size);
-		ft_putendl("oui3.5");
+		//ft_putendl("oui3.5");
 		tmp->value[1] = 42;
-		ft_putendl("oui4");
+		//ft_putendl("oui4");
 	}
 	else if (buff)
 	{
 		buff[0] = get_char_from_add((unsigned char*)address, size);
 		buff[1] = 42;
 	}
-	ft_putstr("checksum: ");
-	ft_putnbr((unsigned char)get_char_from_add((unsigned char*)address, size));
-	ft_putendl("");
+	//ft_putstr("checksum: ");
+	//ft_putnbr((unsigned char)get_char_from_add((unsigned char*)address, size));
+	//ft_putendl("");
 }

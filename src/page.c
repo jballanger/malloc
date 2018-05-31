@@ -15,20 +15,30 @@
 void	fill_page(void **root, t_page *page)
 {
 	t_header	*header;
+  t_key     *key;
 
 	header = *root;
 	*root += sizeof(t_header);
+  key = *root;
+  *root += sizeof(t_key);
 	header->size = (page->available - sizeof(t_header));
 	header->address = *root;
 	header->free = 1;
 	header->next = NULL;
 	header->prev = NULL;
+  ft_putendl("Creating header checksum in fill_page");
+  create_checksum(&key, NULL, (void*)&header, sizeof(t_header));
 	*root += page->available;
+  ft_putendl("check in fill_page");
+  check((void*)&header, sizeof(t_header));
+  ft_putendl("ok");
 	if (!page->blocks)
 		page->blocks = header;
 	else
 		push_header(page, header);
 	page->available -= sizeof(t_header);
+  ft_putendl("updating checksum in fill_page");
+  update_checksum((void*)&page, sizeof(t_page));
 }
 
 void	push_page(t_page *page)
@@ -41,15 +51,22 @@ void	push_page(t_page *page)
 	check((void*)&tmp, sizeof(t_page));
 	ft_putendl("/1/");
 	while (tmp->next)
+  {
 		tmp = tmp->next;
+    if (tmp) check((void*)&tmp, sizeof(t_page));
+  }
 	tmp->next = page;
-	//update_checksum((void*)tmp, sizeof(t_page));
+  ft_putendl("updating checksum in push_page 1");
+	update_checksum((void*)&tmp, sizeof(t_page));
 	page->prev = tmp;
+  ft_putendl("updating checksum in push_page 2");
+  update_checksum((void*)&page, sizeof(t_page));
 }
 
 void	*create_large_page(size_t size)
 {
 	t_page	*page;
+  t_key   *key;
 	void	*root;
 	void	*ptr;
 
@@ -60,12 +77,18 @@ void	*create_large_page(size_t size)
 	page->blocks = NULL;
 	page->next = NULL;
 	page->prev = NULL;
+  key = root;
+  root += sizeof(t_key);
+  ft_putendl("creating checksum in create_large_page");
+  create_checksum(&key, NULL, (void*)&page, sizeof(t_page));
 	if (!g_mem.pages)
 		g_mem.pages = page;
 	else
 		push_page(page);
 	ptr = create_header(&root, page, size, 0);
 	page->available = size;
+  ft_putendl("updating checksum in create_large_page");
+  update_checksum((void*)&page, sizeof(t_page));
 	return (ptr);
 }
 
@@ -89,29 +112,10 @@ void	*create_page(char type, size_t type_max, size_t size)
 		g_mem.pages = page;
 	else
 		push_page(page);
-	/*ft_putendl("a");
-	check((void*)&page, sizeof(t_page));
-	ft_putendl("/a/");*/
 	ptr = create_header(&g_mem.root[type - 1], page, size, 0);
-	/*ft_putendl("b");
-	check((void*)&page, sizeof(t_page));
-	ft_putendl("/b/");*/
 	fill_page(&g_mem.root[type - 1], page);
-	t_page *p = g_mem.pages;
-	ft_putendl("a-------------");
-	ft_putnbr((size_t)p);
-	ft_putchar('\n');
-	p = g_mem.pages;
-	ft_putendl("b-------------");
-	ft_putnbr((size_t)p);
-	ft_putchar('\n');
-	/*ft_putendl("c");
-	check((void*)&page, sizeof(t_page));
-	ft_putendl("/c/");*/
-	ft_putendl("Creating page checksum");
+	ft_putendl("Creating page checksum in create_page");
 	create_checksum(&key, NULL, (void*)&page, sizeof(t_page));
-	ft_putendl("__abc__");
-	check((void*)&page, sizeof(t_page));
 	return (ptr);
 }
 
@@ -121,16 +125,8 @@ t_page	*search_page(char type, size_t size)
 
 	if (!g_mem.pages) return (NULL);
 	page = g_mem.pages;
-	ft_putnbr((size_t)page);
-	ft_putchar('\n');
-	ft_putnbr((size_t)g_mem.pages);
-	ft_putchar('\n');
-	t_page *xd = g_mem.pages;
-	ft_putendl("__ghi2__");
-	check((void*)&xd, sizeof(t_page));
 	while (page)
 	{
-		//show_pages();
 		ft_putendl("x");
 		check((void*)&page, sizeof(t_page));
 		ft_putendl("/x/");

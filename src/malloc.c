@@ -97,6 +97,10 @@ void	*malloc(size_t size)
 
 	if (size < 1)
 		return (NULL);
+  show_alloc_mem();
+  ft_putstr("[malloc] ");
+  ft_putnbr(size);
+  ft_putchar('\n');
 	ptr = ft_malloc(size);
 	/*ft_putendl("^^^^^^^^^^^");
 	ft_putnbr((size_t)g_mem.pages);
@@ -108,5 +112,6 @@ void	*malloc(size_t size)
 	ft_putnbr((size_t)page);
 	ft_putchar('\n');
 	ft_putendl("*****");*/
+  //show_alloc_mem();
 	return (ptr);
 }

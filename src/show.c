@@ -31,7 +31,8 @@ size_t	print_page(char type)
 	total = 0;
 	while (page)
 	{
-		// check((void*)&page, sizeof(t_page));
+    //ft_putendl("checking page");
+		check((void*)&page, sizeof(t_page));
 		if (page->type == type)
 		{
 			if (page->type == 1)
@@ -44,6 +45,8 @@ size_t	print_page(char type)
 			header = page->blocks;
 			while (header)
 			{
+        //ft_putendl("checking header");
+        check((void*)&header, sizeof(t_header));
 				print_addr(header, 0);
 				ft_putstr(" - ");
 				print_addr((void*)((size_t)header + header->size), 0);

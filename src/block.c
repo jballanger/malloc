@@ -30,12 +30,17 @@ void	*get_block(t_page *page, size_t size)
 	header = page->blocks;
 	while (header)
 	{
+    ft_putendl("u");
+    check((void*)&header, sizeof(t_header));
+    ft_putendl("/u/");
 		if (header->free == 1 && header->size >= size)
 		{
 			if ((int)(header->size - (size + sizeof(t_header))) > 40)
 				split_block(page, header, size);
 			header->free = 0;
 			page->available -= size;
+      update_checksum((void*)&header, sizeof(t_header));
+      update_checksum((void*)&page, sizeof(t_page));
 			return (header->address);
 		}
 		header = header->next;
