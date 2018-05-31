@@ -25,6 +25,7 @@ t_page  *get_page(t_header *header)
     pages = pages->next;
   }
   ft_putendl("noooooooooo");
+  exit(0);
   return (NULL);
 }
 
@@ -66,14 +67,15 @@ void		free(void *ptr)
 		header = header->prev;
     if (header) check((void*)&header, sizeof(t_header));
   }
-  ft_putendl("2");
 	//page = (void*)(header - 1);
   page = get_page(header);
-  ft_putendl("checking page");
+  //ft_putendl("checking page");
   check((void*)&page, sizeof(t_page));
 	header = (ptr - (sizeof(t_header) + sizeof(t_key)));
-  ft_putendl("checking header");
+  //ft_putendl("checking header");
   check((void*)&header, sizeof(t_header));
+  ft_putnbr(header->size);
+  ft_putchar('\n');
 	if (page->type == 3)
 		free_large(page, header);
 	else

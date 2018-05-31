@@ -30,6 +30,8 @@ void	*ft_malloc(size_t size)
 	if (IS_TINY(size))
 	{
 		page = search_page(1, size);
+    if (page) ft_putendl("got page");
+    else ft_putendl("no page");
 		if (page)
 			return (get_block(page, size));
 		else {
@@ -37,7 +39,7 @@ void	*ft_malloc(size_t size)
 			/*ft_putendl("-------------");
 			ft_putnbr((size_t)*g_mem.pages);
 			ft_putchar('\n');*/
-			page = g_mem.pages;
+			//page = g_mem.pages;
 			/*ft_putendl("5-------------");
 			ft_putnbr((size_t)page);
 			ft_putchar('\n');
@@ -54,7 +56,7 @@ void	*ft_malloc(size_t size)
 			ft_putnbr((size_t)page);
 			ft_putchar('\n');
 			ft_putendl("d");*/
-			check((void*)&page, sizeof(t_page));
+			//check((void*)&page, sizeof(t_page));
 			/*ft_putendl("/d/");
 			ft_putnbr((size_t)page);
 			ft_putchar('\n');
@@ -97,7 +99,7 @@ void	*malloc(size_t size)
 
 	if (size < 1)
 		return (NULL);
-  show_alloc_mem();
+  //show_pages();
   ft_putstr("[malloc] ");
   ft_putnbr(size);
   ft_putchar('\n');

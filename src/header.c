@@ -19,18 +19,18 @@ void	push_header(t_page *page, t_header *header)
   check((void*)&page, sizeof(t_page));
 	tmp = page->blocks;
   check((void*)&tmp, sizeof(t_header));
-  ft_putendl("ok2");
+  //ft_putendl("ok2");
 	while (tmp && tmp->next)
   {
 		tmp = tmp->next;
-    ft_putendl("hahahahaha");
+    //ft_putendl("hahahahaha");
     if (tmp) check((void*)&tmp, sizeof(t_header));
   }
 	tmp->next = header;
-	ft_putendl("updating checksum in push_header 1");
+	//ft_putendl("updating checksum in push_header 1");
 	update_checksum((void*)&tmp, sizeof(t_header));
 	header->prev = tmp;
-  ft_putendl("updating checksum in push_header 2");
+  //ft_putendl("updating checksum in push_header 2");
   update_checksum((void*)&header, sizeof(t_header));
 }
 
@@ -48,20 +48,20 @@ void	*create_header(void **root, t_page *page, size_t size, char free)
 	header->free = free;
 	header->next = NULL;
 	header->prev = NULL;
-	ft_putendl("Creating checksum in create_header");
+	//ft_putendl("Creating checksum in create_header");
 	create_checksum(&key, NULL, (void*)&header, sizeof(t_header));
 	*root += size;
 	if (!page->blocks)
 		page->blocks = header;
 	else {
-    ft_putendl("pushing header");
+    //ft_putendl("pushing header");
 		push_header(page, header);
   }
 	if (free == 0)
-		page->available -= (size + sizeof(t_header));
+		page->available -= (size + sizeof(t_header) + sizeof(t_key));
 	else
-		page->available -= (sizeof(t_header));
-  ft_putendl("updating checksum in create_header");
+		page->available -= (sizeof(t_header) + sizeof(t_key));
+  //ft_putendl("updating checksum in create_header");
   update_checksum((void*)&page, sizeof(t_page));
 	return (header->address);
 }

@@ -31,7 +31,7 @@ void	check(void **ptr, int size)
 	ft_putstr("\nkey[1]: ");
 	ft_putnbr(key[1]);
 	ft_putchar('\n');
-	ft_putendl("Invalid header, exiting..");
+	ft_putendl("Invalid checksum, exiting..");
 	kill(getpid(), SIGSEGV);
 }
 

@@ -72,7 +72,6 @@ void	show_pages()
 	page = g_mem.pages;
 	while (page)
 	{
-		ft_putendl("x2");
 		check((void*)&page, sizeof(t_page));
 		ft_putendl("------------------------------");
 		ft_putstr("Type: ");
@@ -123,6 +122,7 @@ void	show_alloc_mem()
 {
 	size_t	total;
 
+  ft_putendl("show_alloc_mem()");
 	total = print_page(1);
 	total += print_page(2);
 	total += print_page(3);
