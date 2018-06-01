@@ -65,7 +65,7 @@ void				*realloc(void *ptr, size_t size);
 void				*ft_alloc(size_t size);
 void				*create_page(char type, size_t type_max, size_t size);
 void				*create_large_page(size_t size);
-t_page				*search_page(char type, size_t size);
+void        *search_block(char type, size_t size);
 void				*create_header(void **root, t_page *page, size_t size,\
 	char free);
 void				push_header(t_page *page, t_header *header);
