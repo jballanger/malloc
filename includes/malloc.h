@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:48:19 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/04 14:06:56 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:11:10 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../libft/libft.h"
 
 # include <sys/mman.h>
+# include <signal.h>
 
 typedef struct		s_header
 {
@@ -44,6 +45,11 @@ typedef struct		s_page
 	struct s_page	*prev;
 }					t_page;
 
+typedef struct		s_key
+{
+	unsigned char	value[2];
+}					t_key;
+
 typedef struct		s_mem
 {
 	void			*root[2];
@@ -59,12 +65,16 @@ void				*realloc(void *ptr, size_t size);
 void				*ft_alloc(size_t size);
 void				*create_page(char type, size_t type_max, size_t size);
 void				*create_large_page(size_t size);
-t_page				*search_page(char type, size_t size);
+void        *search_block(char type, size_t size);
 void				*create_header(void **root, t_page *page, size_t size,\
 	char free);
 void				push_header(t_page *page, t_header *header);
 void				*get_block(t_page *page, size_t size);
 int					own_ptr(void *ptr);
 void				show_alloc_mem();
+void				show_pages();
+void				create_checksum(t_key **key, unsigned char buff[2], void **ptr, int size);
+void				update_checksum(void **ptr, int size);
+void				check(void **ptr, int size);
 
 #endif

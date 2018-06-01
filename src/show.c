@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:09:31 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/18 14:28:04 by jballang         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:05:25 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ size_t	print_page(char type)
 	t_header	*header;
 	size_t		total;
 
+	if (!g_mem.pages) return (0);
 	page = g_mem.pages;
 	total = 0;
 	while (page)
 	{
+    //ft_putendl("checking page");
+		check((void*)&page, sizeof(t_page));
 		if (page->type == type)
 		{
 			print_type(page->type);
@@ -57,7 +60,9 @@ size_t	print_page(char type)
 			header = page->blocks;
 			while (header)
 			{
-				print_header(header);
+        //ft_putendl("checking header");
+        check((void*)&header, sizeof(t_header));
+        print_header(header);
 				total += (header->free == 0) ? header->size : 0;
 				header = header->next;
 			}
@@ -72,9 +77,12 @@ void	show_pages()
 	t_page		*page;
 	t_header	*header;
 
+	ft_putendl("!!! show_pages !!!");
+	if (!g_mem.pages) return ;
 	page = g_mem.pages;
 	while (page)
 	{
+		check((void*)&page, sizeof(t_page));
 		ft_putendl("------------------------------");
 		ft_putstr("Type: ");
 		if (page->type == 1)
@@ -89,11 +97,21 @@ void	show_pages()
 		ft_putstr("Available: ");
 		ft_putnbr(page->available);
 		ft_putchar('\n');
+		ft_putstr("Blocks: ");
+		ft_putnbr((size_t)page->blocks);
+		ft_putchar('\n');
+		ft_putstr("Prev: ");
+		ft_putnbr((size_t)page->prev);
+		ft_putchar('\n');
+		ft_putstr("Next: ");
+		ft_putnbr((size_t)page->next);
+		ft_putchar('\n');
 		if (page->blocks)
 		{
 			header = page->blocks;
 			while (header)
 			{
+				check((void*)&header, sizeof(t_header));
 				ft_putendl("     ---------------");
 				ft_putstr("     Address: ");
 				ft_putnbr((size_t)header->address);
@@ -106,6 +124,7 @@ void	show_pages()
 			ft_putendl("     ---------------");
 		}
 		page = page->next;
+    page = NULL;
 	}
 	ft_putendl("------------------------------");
 }
@@ -114,6 +133,7 @@ void	show_alloc_mem(void)
 {
 	size_t	total;
 
+  ft_putendl("show_alloc_mem()");
 	total = print_page(1);
 	total += print_page(2);
 	total += print_page(3);
