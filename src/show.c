@@ -20,6 +20,26 @@ void	print_addr(void *addr, int lf)
 		ft_putchar('\n');
 }
 
+void	print_type(char type)
+{
+	if (type == 1)
+		ft_putstr("TINY : ");
+	else if (type == 2)
+		ft_putstr("SMALL :");
+	else if (type == 3)
+		ft_putstr("LARGE : ");
+}
+
+void	print_header(t_header *header)
+{
+	print_addr(header, 0);
+	ft_putstr(" - ");
+	print_addr((void*)((size_t)header + header->size), 0);
+	ft_putstr(" : ");
+	ft_putnbr(header->size);
+	ft_putendl(" octets");
+}
+
 size_t	print_page(char type)
 {
 	t_page		*page;
@@ -35,24 +55,14 @@ size_t	print_page(char type)
 		check((void*)&page, sizeof(t_page));
 		if (page->type == type)
 		{
-			if (page->type == 1)
-				ft_putstr("TINY : ");
-			else if (page->type == 2)
-				ft_putstr("SMALL :");
-			else if (page->type == 3)
-				ft_putstr("LARGE : ");
+			print_type(page->type);
 			print_addr(page, 1);
 			header = page->blocks;
 			while (header)
 			{
         //ft_putendl("checking header");
         check((void*)&header, sizeof(t_header));
-				print_addr(header, 0);
-				ft_putstr(" - ");
-				print_addr((void*)((size_t)header + header->size), 0);
-				ft_putstr(" : ");
-				ft_putnbr(header->size);
-				ft_putendl(" octets");
+        print_header(header);
 				total += (header->free == 0) ? header->size : 0;
 				header = header->next;
 			}
@@ -119,7 +129,7 @@ void	show_pages()
 	ft_putendl("------------------------------");
 }
 
-void	show_alloc_mem()
+void	show_alloc_mem(void)
 {
 	size_t	total;
 
