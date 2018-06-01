@@ -43,14 +43,14 @@ void	fill_page(void **root, t_page *page)
 
 void	push_page(t_page *page)
 {
-  ft_putendl("oui");
+  //ft_putendl("oui");
 	t_page			*tmp;
 	//unsigned char	buff[2];
 
 	tmp = g_mem.pages;
-	ft_putendl("1");
+	//ft_putendl("1");
 	check((void*)&tmp, sizeof(t_page));
-	ft_putendl("/1/");
+	//ft_putendl("/1/");
 	while (tmp && tmp->next)
   {
 		tmp = tmp->next;
@@ -111,36 +111,38 @@ void	*create_page(char type, size_t type_max, size_t size)
 	key = g_mem.root[type - 1];
 	g_mem.root[type - 1] += sizeof(t_key);
   create_checksum(&key, NULL, (void*)&page, sizeof(t_page));
-  ft_putendl("xx");
+  //ft_putendl("xx");
 	if (!g_mem.pages) {
-    ft_putendl("d1");
+    //ft_putendl("d1");
 		g_mem.pages = page;
   }
 	else {
-    ft_putendl("d2");
+    //ft_putendl("d2");
 		push_page(page);
   }
-  ft_putendl("xx22");
+  //ft_putendl("xx22");
 	ptr = create_header(&g_mem.root[type - 1], page, size, 0);
 	fill_page(&g_mem.root[type - 1], page);
-	ft_putendl("Creating page checksum in create_page");
+	//ft_putendl("Creating page checksum in create_page");
 	return (ptr);
 }
 
-t_page	*search_page(char type, size_t size)
+void	*search_block(char type, size_t size)
 {
 	t_page	*page;
+  void    *addr;
 
-	if (!g_mem.pages) return (NULL);
+	//if (!g_mem.pages) return (NULL);
 	page = g_mem.pages;
 	while (page)
 	{
-		//ft_putendl("x");
 		check((void*)&page, sizeof(t_page));
-		//ft_putendl("/x/");
-    //page->type == type && page->available >= (size + sizeof(t_header) + sizeof(t_key)))
 		if (page->type == type && page->available >= size)
-			return (page);
+    {
+      addr = get_block(page, size);
+      if (addr)
+        return (addr);
+    }
 		page = page->next;
 	}
 	return (NULL);

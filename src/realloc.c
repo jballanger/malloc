@@ -65,6 +65,5 @@ void	*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-  ft_putendl("[realloc]");
 	return (ft_realloc(ptr, size));
 }

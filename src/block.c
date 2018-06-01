@@ -12,6 +12,23 @@
 
 #include "malloc.h"
 
+void  update_available(t_page **page)
+{
+  t_page    *tmp;
+  t_header  *header;
+  size_t    total;
+
+  tmp = *page;
+  header = tmp->blocks;
+  total = 0;
+  while (header)
+  {
+    if (header->free == 1) total += header->size;
+    header = header->next;
+  }
+  tmp->available = total;
+}
+
 void	split_block(t_page *page, t_header *header, size_t size)
 {
 	void	*root;
@@ -41,28 +58,20 @@ void	*get_block(t_page *page, size_t size)
       // if 192 > 120 && (72 > 42)
 			if (header->size > size && \
         (header->size - size) > (sizeof(t_header) + sizeof(t_key)))
-      {
 				split_block(page, header, size);
-        page->available -= size;
-      }
-      else if (page->available <= (size + sizeof(t_header) + sizeof(t_key)))
-      {
-        ft_putendl("xdddd");
-        //exit(0);
-        page->available = 0;
-      }
-			header->free = 0;
+      //page->available -= size;
+      header->free = 0;
+      update_available(&page);
       update_checksum((void*)&header, sizeof(t_header));
       update_checksum((void*)&page, sizeof(t_page));
 			return (header->address);
 		}
 		header = header->next;
 	}
-  ft_putnbr(page->available);
-  ft_putendl(" available\n");
-	ft_putendl("shouldn't happen");
-  exit(0);
+  //ft_putnbr(page->available);
+  //ft_putendl(" available\n");
+  //exit(0);
   //show_pages();
-  ft_putendl("oui");
+  //ft_putendl("oui");
 	return (NULL);
 }

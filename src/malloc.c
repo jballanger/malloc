@@ -25,17 +25,15 @@ void	*ft_alloc(size_t size)
 
 void	*ft_malloc(size_t size)
 {
-	t_page	*page;
+	void  *addr;
 
 	if (IS_TINY(size))
 	{
-		page = search_page(1, size);
-    if (page) ft_putendl("got page");
-    else ft_putendl("no page");
-		if (page)
-			return (get_block(page, size));
+		addr = search_block(1, size);
+		if (addr)
+			return (addr);
 		else {
-			void *p = create_page(1, TINY_MAX, size);
+			addr = create_page(1, TINY_MAX, size);
 			/*ft_putendl("-------------");
 			ft_putnbr((size_t)*g_mem.pages);
 			ft_putchar('\n');*/
@@ -76,14 +74,14 @@ void	*ft_malloc(size_t size)
 			ft_putchar('\n');
 			ft_putnbr((size_t)g_mem.pages);
 			ft_putchar('\n');*/
-			return (p);
+			return (addr);
 		}
 	}
 	else if (IS_SMALL(size))
 	{
-		page = search_page(2, size);
-		if (page)
-			return (get_block(page, size));
+		addr = search_block(2, size);
+		if (addr)
+			return (addr);
 		else
 			return (create_page(2, SMALL_MAX, size));
 	}
@@ -100,9 +98,9 @@ void	*malloc(size_t size)
 	if (size < 1)
 		return (NULL);
   //show_pages();
-  ft_putstr("[malloc] ");
-  ft_putnbr(size);
-  ft_putchar('\n');
+  //ft_putstr("[malloc] ");
+  //ft_putnbr(size);
+  //ft_putchar('\n');
 	ptr = ft_malloc(size);
 	/*ft_putendl("^^^^^^^^^^^");
 	ft_putnbr((size_t)g_mem.pages);

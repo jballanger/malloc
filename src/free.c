@@ -59,7 +59,7 @@ void		free(void *ptr)
 	if (!ptr || !own_ptr(ptr))
 		return ;
   //show_alloc_mem();
-  ft_putendl("[free]");
+  //ft_putendl("[free]");
 	header = (ptr - (sizeof(t_header) + sizeof(t_key)));
   check((void*)&header, sizeof(t_header));
 	while (header && header->prev)
@@ -74,8 +74,8 @@ void		free(void *ptr)
 	header = (ptr - (sizeof(t_header) + sizeof(t_key)));
   //ft_putendl("checking header");
   check((void*)&header, sizeof(t_header));
-  ft_putnbr(header->size);
-  ft_putchar('\n');
+  //ft_putnbr(header->size);
+  //ft_putchar('\n');
 	if (page->type == 3)
 		free_large(page, header);
 	else

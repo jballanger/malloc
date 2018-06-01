@@ -114,6 +114,7 @@ void	show_pages()
 			ft_putendl("     ---------------");
 		}
 		page = page->next;
+    page = NULL;
 	}
 	ft_putendl("------------------------------");
 }
