@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:04:39 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 08:47:06 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:51:32 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	*ft_realloc(void *ptr, size_t size)
 
 void	*realloc(void *ptr, size_t size)
 {
+	void	*addr;
+
 	if (!ptr)
 		return (malloc(size));
 	if (!own_ptr(ptr))
@@ -65,5 +67,8 @@ void	*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-	return (ft_realloc(ptr, size));
+	pthread_mutex_lock(&g_mutex);
+	addr = ft_realloc(ptr, size);
+	pthread_mutex_unlock(&g_mutex);
+	return (addr);
 }
