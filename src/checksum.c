@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 09:50:12 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 15:16:31 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 15:21:33 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,6 @@ void			check(void **ptr, int size)
 	if (key[0] == ptr_key->value[0] &&\
 		key[1] == ptr_key->value[1])
 		return ;
-	ft_putstr("ptr_key[0]: ");
-	ft_putnbr(ptr_key->value[0]);
-	ft_putstr("\nptr_key[1]: ");
-	ft_putnbr(ptr_key->value[1]);
-	ft_putstr("\nkey[0]: ");
-	ft_putnbr(key[0]);
-	ft_putstr("\nkey[1]: ");
-	ft_putnbr(key[1]);
-	ft_putchar('\n');
 	ft_putendl("Invalid checksum, exiting..");
 	kill(getpid(), SIGSEGV);
 }

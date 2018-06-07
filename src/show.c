@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:09:31 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 11:49:14 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 15:20:54 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,63 +67,6 @@ size_t	print_page(char type)
 		page = page->next;
 	}
 	return (total);
-}
-
-void	show_pages()
-{
-	t_page		*page;
-	t_header	*header;
-
-	ft_putendl("!!! show_pages !!!");
-	if (!g_mem.pages) return ;
-	page = g_mem.pages;
-	while (page)
-	{
-		check((void*)&page, sizeof(t_page));
-		ft_putendl("------------------------------");
-		ft_putstr("Type: ");
-		if (page->type == 1)
-			ft_putendl("TINY");
-		if (page->type == 2)
-			ft_putendl("SMALL");
-		if (page->type == 3)
-			ft_putendl("LARGE");
-		ft_putstr("Address: ");
-		ft_putnbr((size_t)page);
-		ft_putchar('\n');
-		ft_putstr("Available: ");
-		ft_putnbr(page->available);
-		ft_putchar('\n');
-		ft_putstr("Blocks: ");
-		ft_putnbr((size_t)page->blocks);
-		ft_putchar('\n');
-		ft_putstr("Prev: ");
-		ft_putnbr((size_t)page->prev);
-		ft_putchar('\n');
-		ft_putstr("Next: ");
-		ft_putnbr((size_t)page->next);
-		ft_putchar('\n');
-		if (page->blocks)
-		{
-			header = page->blocks;
-			while (header)
-			{
-				check((void*)&header, sizeof(t_header));
-				ft_putendl("     ---------------");
-				ft_putstr("     Address: ");
-				ft_putnbr((size_t)header->address);
-				ft_putstr("\n     Size: ");
-				ft_putnbr(header->size);
-				ft_putstr("\n     Free: ");
-				ft_putendl((header->free == 0) ? "No" : "Yes");
-				header = header->next;
-			}
-			ft_putendl("     ---------------");
-		}
-		page = page->next;
-    page = NULL;
-	}
-	ft_putendl("------------------------------");
 }
 
 void	show_alloc_mem(void)
