@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:09:31 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 16:05:25 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 08:49:50 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ size_t	print_page(char type)
 	t_header	*header;
 	size_t		total;
 
-	if (!g_mem.pages) return (0);
 	page = g_mem.pages;
 	total = 0;
 	while (page)
 	{
-    //ft_putendl("checking page");
 		check((void*)&page, sizeof(t_page));
 		if (page->type == type)
 		{
@@ -60,9 +58,8 @@ size_t	print_page(char type)
 			header = page->blocks;
 			while (header)
 			{
-        //ft_putendl("checking header");
-        check((void*)&header, sizeof(t_header));
-        print_header(header);
+				check((void*)&header, sizeof(t_header));
+				print_header(header);
 				total += (header->free == 0) ? header->size : 0;
 				header = header->next;
 			}
@@ -133,7 +130,6 @@ void	show_alloc_mem(void)
 {
 	size_t	total;
 
-  ft_putendl("show_alloc_mem()");
 	total = print_page(1);
 	total += print_page(2);
 	total += print_page(3);

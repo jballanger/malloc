@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:04:39 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/04 14:07:33 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 08:47:06 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_realloc_tiny_small(void *ptr, size_t size, t_header *header)
 	new_size = (header->size > size) ? size : header->size;
 	ft_memcpy(new_ptr, ptr, new_size);
 	header->free = 1;
-  update_checksum((void*)&header, sizeof(t_header));
+	update_checksum((void*)&header, sizeof(t_header));
 	return (new_ptr);
 }
 

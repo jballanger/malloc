@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:51:42 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 16:06:26 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 08:41:11 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,57 +25,15 @@ void	*ft_alloc(size_t size)
 
 void	*ft_malloc(size_t size)
 {
-	void  *addr;
+	void	*addr;
 
 	if (IS_TINY(size))
 	{
 		addr = search_block(1, size);
 		if (addr)
 			return (addr);
-		else {
-			addr = create_page(1, TINY_MAX, size);
-			/*ft_putendl("-------------");
-			ft_putnbr((size_t)*g_mem.pages);
-			ft_putchar('\n');*/
-			//page = g_mem.pages;
-			/*ft_putendl("5-------------");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			//page = *g_mem.pages;
-			ft_putendl("6-------------");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			//page = *g_mem.pages;
-			ft_putendl("7-------------");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			//page = *g_mem.pages;
-			ft_putendl("8-------------");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			ft_putendl("d");*/
-			//check((void*)&page, sizeof(t_page));
-			/*ft_putendl("/d/");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			ft_putendl("1++++++");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			//page = *g_mem.pages;
-			ft_putendl("2++++++");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			//page = *g_mem.pages;
-			ft_putendl("3++++++");
-			ft_putnbr((size_t)page);
-			ft_putchar('\n');
-			ft_putendl("######");
-			ft_putnbr((size_t)g_mem.pages);
-			ft_putchar('\n');
-			ft_putnbr((size_t)g_mem.pages);
-			ft_putchar('\n');*/
-			return (addr);
-		}
+		else
+			return (create_page(1, TINY_MAX, size));
 	}
 	else if (IS_SMALL(size))
 	{
@@ -93,25 +51,9 @@ void	*ft_malloc(size_t size)
 void	*malloc(size_t size)
 {
 	void	*ptr;
-	//t_page	*page;
 
 	if (size < 1)
 		return (NULL);
-  //show_pages();
-  //ft_putstr("[malloc] ");
-  //ft_putnbr(size);
-  //ft_putchar('\n');
 	ptr = ft_malloc(size);
-	/*ft_putendl("^^^^^^^^^^^");
-	ft_putnbr((size_t)g_mem.pages);
-	ft_putchar('\n');
-	ft_putnbr((size_t)g_mem.pages);
-	ft_putchar('\n');
-	page = g_mem.pages;
-	ft_putendl("*****");
-	ft_putnbr((size_t)page);
-	ft_putchar('\n');
-	ft_putendl("*****");*/
-  //show_alloc_mem();
 	return (ptr);
 }
