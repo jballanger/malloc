@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:48:19 by jballang          #+#    #+#             */
-/*   Updated: 2018/05/25 16:11:10 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 08:54:48 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,16 @@ void				*realloc(void *ptr, size_t size);
 void				*ft_alloc(size_t size);
 void				*create_page(char type, size_t type_max, size_t size);
 void				*create_large_page(size_t size);
-void        *search_block(char type, size_t size);
+void				*search_block(char type, size_t size);
 void				*create_header(void **root, t_page *page, size_t size,\
-	char free);
+						char free);
 void				push_header(t_page *page, t_header *header);
 void				*get_block(t_page *page, size_t size);
 int					own_ptr(void *ptr);
 void				show_alloc_mem();
 void				show_pages();
-void				create_checksum(t_key **key, unsigned char buff[2], void **ptr, int size);
+void				create_checksum(t_key **key, unsigned char buff[2],\
+						void **ptr, int size);
 void				update_checksum(void **ptr, int size);
 void				check(void **ptr, int size);
 
