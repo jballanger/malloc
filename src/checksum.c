@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 09:50:12 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 08:31:45 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 15:16:31 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,22 @@ unsigned char	get_char_from_add(unsigned char *ptr, int size)
 	return (c & 255);
 }
 
+unsigned char	get_char_from_multiply(unsigned char *ptr, int size)
+{
+	int				i;
+	unsigned char	c;
+
+	i = 0;
+	c = 0;
+	while (i < size)
+	{
+		c *= *ptr;
+		ptr++;
+		i++;
+	}
+	return (c & 255);
+}
+
 void			update_checksum(void **ptr, int size)
 {
 	t_key	*key;
@@ -70,11 +86,11 @@ void			create_checksum(t_key **key, unsigned char buff[2],\
 	{
 		tmp = *key;
 		tmp->value[0] = get_char_from_add((unsigned char*)address, size);
-		tmp->value[1] = 42;
+		tmp->value[1] = get_char_from_multiply((unsigned char*)address, size);
 	}
 	else if (buff)
 	{
 		buff[0] = get_char_from_add((unsigned char*)address, size);
-		buff[1] = 42;
+		buff[1] = get_char_from_multiply((unsigned char*)address, size);
 	}
 }
