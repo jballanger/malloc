@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:48:19 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 08:54:48 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:46:04 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # include <sys/mman.h>
 # include <signal.h>
+# include <pthread.h>
 
 typedef struct		s_header
 {
@@ -57,7 +58,8 @@ typedef struct		s_mem
 	t_page			*pages;
 }					t_mem;
 
-t_mem				g_mem;
+t_mem					g_mem;
+static pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void				*malloc(size_t size);
 void				free(void *ptr);

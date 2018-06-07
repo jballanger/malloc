@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 10:32:50 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 08:50:21 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:57:15 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_page	*get_page(t_header *header)
 			return (pages);
 		pages = pages->next;
 	}
-	ft_putendl("noooooooooo");
-	exit(0);
 	return (NULL);
 }
 
@@ -49,13 +47,11 @@ void	free_large(t_page *page, t_header *header)
 	page = NULL;
 }
 
-void	free(void *ptr)
+void	ft_free(void *ptr)
 {
 	t_page		*page;
 	t_header	*header;
 
-	if (!ptr || !own_ptr(ptr))
-		return ;
 	header = (ptr - (sizeof(t_header) + sizeof(t_key)));
 	check((void*)&header, sizeof(t_header));
 	while (header && header->prev)
@@ -65,6 +61,8 @@ void	free(void *ptr)
 			check((void*)&header, sizeof(t_header));
 	}
 	page = get_page(header);
+	if (!page)
+		return ;
 	header = (ptr - (sizeof(t_header) + sizeof(t_key)));
 	check((void*)&header, sizeof(t_header));
 	if (page->type == 3)
@@ -76,4 +74,13 @@ void	free(void *ptr)
 		update_checksum((void*)&header, sizeof(t_header));
 		update_checksum((void*)&page, sizeof(t_page));
 	}
+}
+
+void	free(void *ptr)
+{
+	if (!ptr || !own_ptr(ptr))
+		return ;
+	pthread_mutex_lock(&g_mutex);
+	ft_free(ptr);
+	pthread_mutex_unlock(&g_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:51:42 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 08:41:11 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:50:56 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	*malloc(size_t size)
 
 	if (size < 1)
 		return (NULL);
+	pthread_mutex_lock(&g_mutex);
 	ptr = ft_malloc(size);
+	pthread_mutex_unlock(&g_mutex);
 	return (ptr);
 }

@@ -30,7 +30,7 @@ lft:
 	$(MAKE) -C libft
 
 $(NAME): $(OBJ)
-	$(CC) -shared $^ -o $@  -Llibft -lft
+	$(CC) -lpthread -shared $^ -o $@  -Llibft -lft
 	@rm -f libft_malloc.so
 	@ln -s $(NAME) libft_malloc.so
 

@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:09:31 by jballang          #+#    #+#             */
-/*   Updated: 2018/06/07 08:49:50 by jballang         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:49:14 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,12 @@ void	show_alloc_mem(void)
 {
 	size_t	total;
 
+	pthread_mutex_lock(&g_mutex);
 	total = print_page(1);
 	total += print_page(2);
 	total += print_page(3);
 	ft_putstr("Total : ");
 	ft_putnbr(total);
 	ft_putendl(" octets");
+	pthread_mutex_unlock(&g_mutex);
 }
